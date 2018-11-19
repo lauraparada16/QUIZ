@@ -2,6 +2,7 @@ package com.crunchify.jsp.servlet;
  
 
 import DAO.EstudianteDAO;
+import VO.Estudiante;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,20 +18,21 @@ import javax.servlet.RequestDispatcher;
 public class HelloCrunchify extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // reading the user input
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
+        String codEstudiante = request.getParameter("codEstudiante");
+        String nomEstudiante = request.getParameter("nomEstudiante");
+        String codEscuela = request.getParameter("codEscuela");
         
         //Se debe incluir validaciones - Lo recuerda: Gestion de Excepciones.
         EstudianteDAO dao = new EstudianteDAO();
         
-        Departamento departamento = new Departamento();
-        departamento.setId_departamento(Integer.parseInt(id));
-        departamento.setNom_departamento(nombre);
-        dao.insert(departamento);
+        Estudiante estudiante = new Estudiante();
+        estudiante.setCodEstudiante(Integer.parseInt(codEstudiante));
+        estudiante.setNomEstudiante(nomEstudiante);
+        estudiante.setCodEscuela(Integer.parseInt(codEscuela));
         
         //Listando la informacion  
-        List<Departamento> departamentos =  dao.findAll();
-        request.setAttribute("departamentos", departamentos);
+        List<Estudiante> estudiantes =  dao.findAll();
+        request.setAttribute("Estudiantes ", estudiantes);
        
        
         //Redireccionando la informacion
